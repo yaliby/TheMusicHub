@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Spotify Style Intro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="padding-bottom: 0;">
+    <!-- כפתור תמונה בצד ימין למעלה -->
+    <div class="music-toggle">
+        <img src="img/system/mlogo.png" alt="Music Logo" id="musicLogo">
+    </div>
+
+    <!-- ווידאו ושאר התוכן -->
+    <video style="background-color: black;" autoplay loop muted playsinline class="background-video hidden">
+        <source src="vids/open.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay">
+        <h1 class="intro-text word-1">Turn up</h1>
+        <h1 class="intro-text word-2">the volume</h1>
+        <h1 class="intro-text word-3">turn down</h1>
+        <h1 class="intro-text word-4">the world</h1>
+        <button style="margin-top: 15%;" id="letsStartButton" class="lets-start-btn">Let's Start</button>
+    </div>
+
+ 
+
+    
+
+    <script src="script.js"></script>
+</body>
+</html>

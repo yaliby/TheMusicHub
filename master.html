@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="master.js" defer></script>
+    <script src="player.js" defer></script>
+    <script src="script.js" defer></script>
+
+
+</head>
+<body>
+    <!-- Header קבוע -->
+    <header class="header">
+        <div style="display: flex; margin-right: 1%;">
+            <a style="text-decoration: none;" href="master.html?page=login">
+
+                <button class="btn shrink-container2">
+                    <svg width="180" height="60" viewBox="0 0 180 60" class="border">
+                        <rect x="1" y="1" width="178" height="58" class="bg-line" />
+                        <rect x="1" y="1" width="178" height="58" class="hl-line" />
+                    </svg>
+                    <span style="margin-left: 30%;">התחבר</span>
+                </button>
+
+            </a>    
+            <a style="text-decoration: none;" href="master.html?page=register">
+
+                <button class="btn shrink-container">
+                <svg width="180" height="60" viewBox="0 0 180 60" class="border">
+                    <rect x="1" y="1" width="178" height="58" class="bg-line" />
+                    <rect x="1" y="1" width="178" height="58" class="hl-line" />
+                </svg>
+                <span>הירשם</span>
+
+            </button>
+            </a>
+            <a style="text-decoration: none;" href="master.html?page=nextpage">
+
+                <button class="btn shrink-container">
+                    <svg width="180" height="60" viewBox="0 0 180 60" class="border">
+                        <rect x="1" y="1" width="178" height="58" class="bg-line" />
+                        <rect x="1" y="1" width="178" height="58" class="hl-line" />
+                    </svg>
+                    <span>דף הבית</span>
+                </button>
+
+            </a>
+        </div>
+
+        <div class="shrink-containerS">
+            <div class="box">
+                <form name="search" onsubmit="return false;">
+                    <input id="search-bar" type="text" class="input" name="txt" onmouseout="this.value = ''; this.blur();" placeholder="Search for songs, playlists, or artists..." oninput="filterResults()">
+                </form>
+                <i class="fas fa-search"></i>
+            </div>
+            <!-- אזור התוצאות -->
+            <div id="search-results" class="results-container"></div>
+        </div>
+        
+        
+
+        <div class="logo-wrapper">
+            <a href="master.html?page=nextpage">
+                <img src="img/system/logo.png" alt="Music Hub Logo" class="logo">
+            </a>
+        </div>
+        
+        
+        <ul>
+            <a style="text-decoration: none;" target="_blank"><li class="instagram"><i class="fa-brands fa-instagram icon1 icon"></i></li></a>
+            <a style="text-decoration: none;" target="_blank"><li class="twitter"><i class="fa-brands fa-twitter icon2 icon"></i></li></a>
+            <a style="text-decoration: none;" href="https://music.youtube.com/playlist?list=RDATgFX"target="_blank"><li class="youtube"><i class="fa-brands fa-youtube icon3 icon"></i></li></a>
+            <a style="text-decoration: none;" target="_blank"><li class="facebook"><i class="fa-brands fa-facebook icon4 icon"></i></li></a>
+        </ul>
+    </header>
+
+    <!-- תוכן דינמי -->
+    <main id="dynamic-content">
+        <!-- כאן נטען התוכן הדינמי -->
+    </main>
+
+    <!-- Music Player נגן מוזיקה -->
+   <div id="music-player">
+    <div id="song-title">No song playing</div>
+    <button id="toggle-player">
+        <i class="arrow"></i>
+    </button>
+    <audio id="audio-player" controls>
+        <source id="audio-source" src="">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+</body>
+</html>

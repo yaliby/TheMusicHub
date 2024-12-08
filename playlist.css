@@ -1,0 +1,185 @@
+/* עיצוב כללי */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* רקע כהה */
+    color: #ffffff; /* טקסט לבן */
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* כותרת עמוד הפלייליסטים */
+.playlist-header {
+    text-align: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #1e1e1e; /* רקע כהה יותר */
+    border-radius: 10px;
+    max-width: 800px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.playlist-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #1db954; /* ירוק בסגנון ספוטיפיי */
+}
+
+.playlist-header img {
+    width: 250px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.playlist-header p {
+    font-size: 1.2rem;
+    color: #b3b3b3; /* אפור עדין */
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+/* עיצוב רשימת השירים */
+.playlist-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #282828; /* רקע כהה לשירים */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.song-item:hover {
+    background-color: #333333;
+}
+
+.song-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.song-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.track-number {
+    font-size: 1rem;
+    color: #b3b3b3;
+    margin-right: 10px;
+}
+
+.track-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.track-album {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+}
+
+.song-duration {
+    font-size: 0.9rem;
+    color: #b3b3b3;
+    margin-left: auto;
+    margin-right: 1.5%;
+}
+
+/* כפתור ניגון */
+.play-btn {
+    background-color: #1db954; /* כפתור ירוק */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-btn:hover {
+    background-color: #1aa34a; /* ירוק כהה יותר */
+    transform: scale(1.05); /* הגדלה קטנה בעת ריחוף */
+}
+
+/* רספונסיביות למסכים קטנים */
+@media (max-width: 768px) {
+    .playlist-header img {
+        width: 200px;
+    }
+
+    .song-info img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .play-btn {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+
+    #song-title {
+        font-size: 1rem;
+    }
+}
+/* עיצוב כפתור Play בפלייליסט */
+.playlist-container .play-btn {
+    width: 6em;
+    position: relative;
+    height: 3em;
+    border: 2px ridge #51ac3b;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    transition: all 1s ease;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.playlist-container .play-btn::after,
+.playlist-container .play-btn::before {
+    content: "";
+    position: absolute;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: transform 0.5s ease;
+    transform-origin: center;
+}
+
+.playlist-container .play-btn::after {
+    top: -10px;
+}
+
+.playlist-container .play-btn::before {
+    top: 80%;
+}
+
+.playlist-container .play-btn:hover::before,
+.playlist-container .play-btn:hover::after {
+    transform: scale(0);
+}
+
+.playlist-container .play-btn:hover {
+    box-shadow: inset 0px 0px 25px #43ff72;
+}

@@ -1,0 +1,434 @@
+/* עיצוב כללי לעמוד */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #333;
+    line-height: 1.6;
+    text-align: center;
+    padding-bottom: 9.5%;
+}
+
+/* עיצוב כותרת */
+.artist-container h1 {
+    font-size: 2.5rem;
+    margin-top: 20px;
+    color: #222;
+}
+
+/* תמונת האמן */
+.artist-container img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* עיצוב ביוגרפיה */
+.artist-container p {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    color: #555;
+    max-width: 600px;
+    margin: 10px auto;
+}
+
+/* עיצוב כותרת רשימת השירים */
+.artist-container h3 {
+    margin-top: 30px;
+    font-size: 1.8rem;
+    color: #444;
+}
+
+
+
+
+
+
+
+.artist-container ul {
+    list-style: none; /* הסרת הנקודות מהרשימה */
+    padding: 0;
+    margin: 0 auto;
+    width: 80%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.artist-container ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #282828; /* רקע כהה */
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    font-size: 1rem;
+    width: 100%;
+}
+
+
+
+.artist-container ul li img {
+    width: 50px; /* תמונה ממוזערת */
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.artist-container ul li .track-title {
+    flex: 2; /* שם השיר */
+    margin-left: 24%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.artist-container ul li .track-duration {
+    flex: 1; /* אורך השיר */
+    text-align: right;
+    color: #b3b3b3;
+    margin-right: 5%;
+}
+.artist-container button{
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: 2px ridge #51ac3b;
+    outline: none;
+    background-color: transparent;
+    color: white;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+  
+.artist-container button::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+    transform-origin: center;
+  }
+  
+  .artist-container button::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
+  }
+  
+  .artist-container button:hover::before, button:hover::after {
+    transform: scale(0)
+  }
+  
+  .artist-container button:hover {
+    box-shadow: inset 0px 0px 25px #43ff72;
+  }
+
+
+
+
+
+
+
+.header {
+    position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
+    top: 0 !important; /* מצמיד לחלק העליון */
+    right: 0 !important; /* מצמיד לצד ימין */
+    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    display: flex !important;
+    justify-content: flex-end !important; /* ממקם את התוכן לצד ימין */
+    align-items: center !important;
+    background-color: #181818 !important; /* צבע רקע */
+    padding: 20px !important;
+    z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
+}
+
+.header-left .nav-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 15px; /* מוסיף ריווח בין הכפתורים */
+    transition: color 0.3s;
+}
+
+.header-left .nav-button:hover {
+    color: #1db954; /* צבע ירוק בדומה לספוטיפיי */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* עיצוב לנגן */
+#music-player {
+    position: fixed; /* הנגן צמוד לחלון המסך */
+    bottom: 0; /* צמוד לחלוטין לתחתית המסך */
+    left: 0; /* מתחיל מהקצה השמאלי */
+    width: 100%; /* תופס את כל רוחב המסך */
+    background-color: #000000; /* רקע כהה */
+    color: #ffffff; /* טקסט לבן */
+    border-radius: 0; /* אין פינות מעוגלות */
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* צל כדי להבליט את הנגן */
+    text-align: center;
+    z-index: 1000; /* מעל כל תוכן אחר */
+}
+
+/* כותרת השיר */
+#song-title {
+    font-size: 1rem; /* גודל טקסט מותאם */
+    font-weight: bold;
+    color: #4CAF50; /* ירוק בהיר */
+    margin-bottom: 10px;
+}
+
+/* הנגן */
+#audio-player {
+    width: 100%; /* תופס את כל רוחב הנגן */
+    border-radius: 0; /* אין פינות מעוגלות */
+    background-color: black; /* צבע רקע כהה לכפתורים */
+    color: white; /* טקסט לבן */
+    padding: 5px;
+    outline: none;
+    border: none;
+}
+
+/* מדיה קוויריז למסכים קטנים */
+@media (max-width: 768px) {
+    #music-player {
+        padding: 10px; /* ריווח פנימי קטן יותר למסכים קטנים */
+    }
+
+    #song-title {
+        font-size: 0.9rem; /* טקסט קטן יותר למסכים קטנים */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
+    position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
+    top: 0 !important; /* מצמיד לחלק העליון */
+    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    height: 5%;
+    display: flex !important;
+    justify-content: space-between !important; /* ממקם את התוכן לצד ימין */
+    align-items: center !important;
+    background-color: #181818 !important; /* צבע רקע */
+    padding: 20px !important;
+    z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
+    flex-direction: row-reverse;
+}
+
+
+
+
+/* עיצוב לנגן */
+#music-player {
+    position: fixed; /* להצמיד את הנגן לחלון המסך */
+    bottom: 0; /* צמוד לתחתית */
+    left: 50%; /* ממרכז את הנגן אופקית */
+    transform: translateX(-50%); /* ממרכז בצורה מדויקת */
+    background-color: #000000; /* רקע כהה */
+    color: #ffffff; /* טקסט לבן */
+    padding: 15px;
+    border-radius: 20px; /* מעוגל מכל הצדדים */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* צל כדי לתת עומק */
+    width: 98%; /* גודל קטן וממוקד */
+    text-align: center;
+    z-index: 1000; /* מעל תוכן העמוד */
+    height: auto; /* גובה מותאם לפי התוכן */
+}
+
+/* כותרת השיר */
+#song-title {
+    font-size: 1rem; /* גודל טקסט מותאם */
+    font-weight: bold;
+    color: #4CAF50; /* ירוק בהיר */
+    margin-bottom: 10px;
+}
+
+/* הנגן */
+#audio-player {
+    width: 100%; /* מותאם לרוחב הנגן */
+    border-radius: 10px; /* קצוות מעוגלים */
+    background-color: black; /* צבע רקע כהה לכפתורים */
+    color: white; /* טקסט לבן */
+    padding: 5px;
+    outline: none;
+}
+
+/* מרווח לתוכן העמוד */
+body {
+    padding-bottom: 9%; /* מוסיף רווח כדי למנוע מהנגן להסתיר את התוכן */
+}
+
+/* מדיה קוויריז למסכים קטנים */
+@media (max-width: 768px) {
+    #music-player {
+        width: 90%; /* הנגן יתפוס יותר רוחב במסכים קטנים */
+        max-width: 280px; /* גבול לגודל הנגן */
+    }
+
+    #song-title {
+        font-size: 0.9rem; /* טקסט קטן יותר למסכים קטנים */
+    }
+
+    body {
+        padding-bottom: 100px; /* רווח גדול יותר למסכים קטנים */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.h2{
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-weight: bold;
+}
+/* Playlist Section */
+#playlist-container {
+    background-color: #181818; /* Dark background */
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px; /* Center the section and limit its width */
+    color: white;
+}
+
+#playlist-container h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.playlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.playlist li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #282828; /* Darker row background */
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.playlist li:hover {
+    background-color: #333;
+}
+
+.playlist li span {
+    font-size: 1rem;
+    color: #ffffff;
+    flex: 1;
+}
+
+.playlist li .play-btn {
+    background-color: #1db954; /* Spotify green */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.playlist li .play-btn:hover {
+    background-color: #1aa34a; /* Darker green on hover */
+}
+
+/* For Track Duration and Additional Info */
+.track-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #b3b3b3; /* Subtle gray */
+}
+
+.track-duration {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: #b3b3b3; /* Subtle gray */
+}

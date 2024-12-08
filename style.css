@@ -1,0 +1,964 @@
+a{
+    text-decoration: none;
+}
+/* איפוס סגנונות */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* מאפשר גלילה אנכית */
+    font-family: 'Arial', sans-serif;
+    background: black;
+    color: white;
+}
+
+/* מיקום הלוגו */
+.logo-wrapper {
+    position: absolute; /* הלוגו ממוקם באופן מוחלט ביחס ל-header */
+    top: 50%; /* ממורכז אנכית בתוך ה-header */
+    left: 33%; /* ממורכז אופקית */
+    transform: translate(-50%, -50%); /* מבטיח שהמרכוז מדויק */
+    z-index: 1000; /* הלוגו יישאר בשכבה עליונה מעל כל האלמנטים */
+    pointer-events: auto; /* מאפשר לחיצה על הלוגו */
+}
+
+
+#search-results {
+    position: absolute; /* Position relative to the parent container */
+    top: 100%; /* Place below the search bar */
+    left: 39%;
+    background-color: #6be369; /* Background for contrast */
+    border: 1px solid #ccc;
+    max-height: 200px; /* Set a limit for scrolling */
+    overflow-y: auto; /* Enable scrolling for long lists */
+    z-index: 1000;
+    display: none; /* Initially hidden */
+    width: 60%;
+    text-align: center;
+    color: #000;
+    font-size: large;
+    font-weight: bold;
+}
+
+.result-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.result-item:hover {
+    background-color: #357532; /* Highlight on hover */
+}
+
+
+
+.logo {
+    max-width: 29%; /* גודל הלוגו */
+    height: auto; /* שמירה על פרופורציות */
+    display: block; /* מבטיח שהלוגו מוצג נכון */
+}
+
+
+.bodyL_R{
+    position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
+    top: 0 !important; /* מצמיד לחלק העליון */
+    right: 0 !important; /* מצמיד לצד ימין */
+    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    height: 10%;
+    display: flex !important;
+    justify-content: space-between !important; /* ממקם את התוכן לצד ימין */
+    align-items: center !important;
+    background-color: #181818 !important; /* צבע רקע */
+    padding: 20px !important;
+    z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
+}
+
+
+/* וידאו עם אפקט Fade-In */
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* מוסתר בהתחלה */
+    z-index: -1;
+    animation: fadeIn 2s ease-in-out forwards;
+    animation-delay: 2s; /* הווידאו מתחיל רק אחרי שהטקסט מתחיל לנוע */
+}
+
+/* אנימציית Fade-In לווידאו */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* שכבת טקסט */
+.overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+}
+
+/* טקסט מופיע במרכז בגודל גדול */
+.intro-text {
+    font-size: 9.5vh; /* גודל שמתאים לרוב המסכים */
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeInText 1.2s ease-in-out forwards, moveToPosition 2s ease-in-out forwards, glowEffect 2s ease-in-out infinite;
+    animation-delay: 0.5s; /* מופיע אחרי 0.5 שנייה */
+    position: relative;
+}
+
+/* התאמת עיכוב לכל מילה */
+.word-1 { animation-delay: 0.5s; }
+.word-2 { animation-delay: 1s; }
+.word-3 { animation-delay: 1.5s; }
+.word-4 { animation-delay: 2s; }
+
+/* אפקט נצנוץ/בהירות */
+@keyframes glowEffect {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                     0 0 20px rgba(255, 255, 255, 0.6),
+                     0 0 30px rgba(255, 255, 255, 0.4);
+    }
+    50% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.5),
+                     0 0 15px rgba(255, 255, 255, 0.3),
+                     0 0 25px rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* אנימציה נוספת: תנועה עדינה (נשימה) */
+@keyframes moveToPosition {
+    0% {
+        transform: translate(-50%, -50%) translateY(-9px); /* תנועה קלה מעלה */
+    }
+    50% {
+        transform: translate(-50%, -50%) translateY(9px); /* תנועה קלה מטה */
+    }
+    100% {
+        transform: translate(-50%, -50%) translateY(-9px); /* חזרה למעלה */
+    }
+}
+
+/* אנימציית Fade-In */
+@keyframes fadeInText {
+    from {
+        opacity: 0;
+        transform: scale(1.5); /* התחלה עם גודל מוגדל */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); /* חזרה לגודל המקורי */
+    }
+}
+/* מיקום הכפתור */
+.music-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10%;
+    cursor: pointer;
+    z-index: 2; /* מעל כל התוכן */
+    transition: transform 0.3s ease;
+}
+
+/* עיצוב התמונה */
+.music-toggle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* הופך את התמונה לעיגול */
+    transition: transform 0.3s ease;
+}
+
+/* אפקט קו אלכסוני אדום */
+.music-toggle.music-off::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: red;
+    transform: rotate(-45deg) translate(-50%, -50%);
+    transform-origin: center;
+    animation: drawLine 0.5s forwards ease-in-out; /* אנימציה של הקו */
+}
+
+/* אנימציית הקו האדום */
+@keyframes drawLine {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 140%;
+    }
+}
+
+/* כיבוי מוזיקה */
+.music-toggle.music-off img {
+    opacity: 0.6; /* מפחית את שקיפות התמונה */
+}
+
+/* סגנון לכפתור 'Let's Start' */
+.lets-start-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff5722; /* צבע רקע כתום */
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+    opacity: 0;
+    animation: fadeInText 1.2s ease-in-out forwards, moveToPosition 2s ease-in-out forwards, glowEffect 2s ease-in-out infinite;
+    animation-delay: 0.5s; /* מופיע אחרי 0.5 שנייה */
+    position: relative;
+}
+
+.lets-start-btn:hover {
+    background-color: #e64a19; /* גוון כהה יותר ב-hover */
+    transform: scale(1.1); /* הגדלה קטנה */
+    box-shadow: 0 0 15px rgba(255, 87, 34, 0.6);
+}
+/* אפקט Fade-Out לכל הגוף */
+body.fade-out {
+    animation: fadeOut 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+
+
+/* עיצוב הכפתור */
+.btn {
+    position: relative;
+    display: inline-block;
+    width: 180px;
+    height: 60px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden; /* מוודא שהאנימציה לא תחרוג מהכפתור */
+}
+
+/* עיצוב ה-SVG */
+.btn svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #4CAF50;
+    stroke-width: 2;
+}
+
+/* הקו הבסיסי */
+.btn .bg-line {
+    stroke-dasharray: 480;
+    stroke-dashoffset: 480;
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+/* הקו בהובר */
+.btn:hover .bg-line {
+    stroke-dashoffset: 0;
+}
+
+/* קו נוסף לאפקט */
+.btn .hl-line {
+    stroke-dasharray: 480;
+    stroke-dashoffset: -480;
+    transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.btn:hover .hl-line {
+    stroke-dashoffset: 0;
+}
+
+/* עיצוב הטקסט */
+.btn span {
+    position: relative;
+    z-index: 1;
+    font-size: 18px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.btn:hover span {
+    color: #4CAF50;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* נגן מוזיקה */
+#music-player {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 15px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    width: 98%;
+    text-align: center;
+    z-index: 1000;
+    overflow: hidden; /* מסתיר תוכן במצב ממוזער */
+    max-height: 200px; /* גובה מקסימלי במצב פתוח */
+    transition: max-height 1s ease, padding 1.2s ease; /* אנימציה חלקה */
+}
+
+/* במצב ממוזער */
+#music-player.collapsed {
+    max-height: 2%; /* גובה במצב ממוזער */
+}
+
+/* כפתור החץ */
+#toggle-player {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.5rem;
+    transform: rotate(0deg); /* כיוון החץ */
+    transition: transform 0.5s ease; /* סיבוב החץ */
+}
+
+/* חץ מסתובב */
+#music-player.collapsed #toggle-player {
+    transform: rotate(180deg); /* סיבוב חץ במצב ממוזער */
+}
+
+/* עיצוב החץ */
+#toggle-player .arrow::before {
+    content: "⯆"; /* חץ למטה */
+}
+
+
+
+
+/* כותרת השיר */
+#song-title {
+    font-size: 1rem; /* גודל טקסט מותאם */
+    font-weight: bold;
+    color: #4CAF50; /* ירוק בהיר */
+    margin-bottom: 10px;
+}
+
+/* הנגן */
+#audio-player {
+    width: 100%; /* מותאם לרוחב הנגן */
+    border-radius: 10px; /* קצוות מעוגלים */
+    background-color: black; /* צבע רקע כהה לכפתורים */
+    color: white; /* טקסט לבן */
+    padding: 5px;
+    outline: none;
+}
+
+/* מרווח לתוכן העמוד */
+body {
+    padding-bottom: 9%; /* מוסיף רווח כדי למנוע מהנגן להסתיר את התוכן */
+}
+
+/* מדיה קוויריז למסכים קטנים */
+@media (max-width: 768px) {
+    #music-player {
+        width: 90%; /* הנגן יתפוס יותר רוחב במסכים קטנים */
+        max-width: 280px; /* גבול לגודל הנגן */
+    }
+
+    #song-title {
+        font-size: 0.9rem; /* טקסט קטן יותר למסכים קטנים */
+    }
+
+    body {
+        padding-bottom: 100px; /* רווח גדול יותר למסכים קטנים */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
+.logbody * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Quicksand", sans-serif;
+  }
+  
+.logbody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #111;
+  width: 100%;
+  overflow: hidden;
+}
+.ring {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ring i {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  transition: 0.5s;
+}
+.ring i:nth-child(1) {
+  border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+  animation: animate 6s linear infinite;
+}
+.ring i:nth-child(2) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+  animation: animate 4s linear infinite;
+}
+.ring i:nth-child(3) {
+  border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+  animation: animate2 10s linear infinite;
+}
+.ring:hover i {
+  border: 6px solid var(--clr);
+  filter: drop-shadow(0 0 20px var(--clr));
+}
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes animate2 {
+  0% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.login {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.login h2 {
+  font-size: 2em;
+  color: #fff;
+}
+.login .inputBx {
+  position: relative;
+  width: 100%;
+}
+.login .inputBx input {
+  position: relative;
+  width: 100%;
+  padding: 12px 20px;
+  background: transparent;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  font-size: 1.2em;
+  color: #fff;
+  box-shadow: none;
+  outline: none;
+}
+.login .inputBx input[type="submit"] {
+  width: 100%;
+  background: #0078ff;
+  background: linear-gradient(45deg, #ff357a, #fff172);
+  border: none;
+  cursor: pointer;
+}
+.login .inputBx input::placeholder {
+  color: rgba(255, 255, 255, 0.75);
+}
+.login .links {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+.login .links a {
+  color: #fff;
+  text-decoration: none;
+}
+.password-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.inputBx {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.inputBx input {
+    padding-right: 40px;
+}
+
+.toggle-button {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px; /* להתאמה לגודל */
+    outline: none; /* להורדת הגבול */
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+.button-container {
+    position: relative;
+    display: inline-block;
+}
+.hidden-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* הקישור יהיה לפני הכפתור */
+    background: transparent; /* שקוף */
+    border: none;
+    cursor: pointer;
+}
+
+.button-container input[type="submit"] {
+    position: relative;
+    z-index: 2; /* הכפתור מעל הקישור */
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #0078ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-container input[type="submit"]:hover {
+    background-color: #0056d2; /* שינוי צבע בהובר */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ul{
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+
+li{
+    list-style: none;
+    display: inline-block;
+    font-size: 23px;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.instagram{
+    border: 2px solid #ff0095;
+    color: #c72b7e;
+}
+
+.twitter{
+    border: 2px solid #1c9ff1;
+    color: #1c9ff1;
+}
+
+.youtube{
+    border: 2px solid #ff0000;
+    color: #ff0000;
+}
+
+.facebook{
+    border: 2px solid #0679e6;
+    color: #0679e6;
+}
+
+
+/* #####################  Hover EFFECTS ############################# */
+
+.icon{
+    transition: 0.6s;
+}
+
+li:hover .icon1{
+    transform: rotateY(360deg);
+    text-shadow: 0px 0px 1px #ff0095;
+}
+
+li:hover .icon2{
+    transform: rotateY(360deg);
+    text-shadow: 0px 0px 1px #1c9ff1;
+}
+
+li:hover .icon3{
+    transform: rotateY(360deg);
+    text-shadow: 0px 0px 1px #ff0000;
+}
+
+li:hover .icon4{
+    transform: rotateY(360deg);
+    text-shadow: 0px 0px 1px #0679e6;
+}
+
+li{
+    transition: 0.4s;
+    transition-delay: 0.2s;
+}
+
+.instagram:hover{
+    box-shadow: 0px 0px 7px #ff0095 inset,
+                0px 0px 7px #ff0095;
+}
+
+.twitter:hover{
+    box-shadow: 0px 0px 7px #1c9ff1 inset,
+                0px 0px 7px #1c9ff1;
+}
+
+.youtube:hover{
+    box-shadow: 0px 0px 7px #ff0000 inset,
+                0px 0px 7px #ff0000;
+}
+
+.facebook:hover{
+    box-shadow: 0px 0px 7px #0679e6 inset,
+                0px 0px 7px #0679e6;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
+    position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
+    top: 0 !important; /* מצמיד לחלק העליון */
+    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    height: 5%;
+    display: flex !important;
+    justify-content: space-between !important; /* ממקם את התוכן לצד ימין */
+    align-items: center !important;
+    background-color: #181818 !important; /* צבע רקע */
+    padding: 20px !important;
+    z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
+    flex-direction: row-reverse;
+}
+/* שינוי לעמודי האמנים */
+.artist-page .header {
+    transform: translateX(2.5%); /* הניו-בר זז שמאלה */
+}
+
+
+
+
+/* עיצוב אמנים פופולריים */
+.popular-artists {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}
+
+.artists-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.artist img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.artist p {
+    margin-top: 10px;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+}
+
+/* עיצוב פלייליסטים מוצעים */
+.suggested-playlists {
+    text-align: center;
+    color: white;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+.playlists-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.playlist img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.playlist img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+.playlist p {
+    margin-top: 10px;
+    color: #b3b3b3;
+    font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+.shrink-container {
+    transform: scale(0.9); /* מקטין את כל התוכן ל-70% מגודלו המקורי */
+    transform-origin: center center; /* ממרכז את ההקטנה */
+    display: inline-block; /* שומר על מבנה המיכל */
+}
+.shrink-containerS {
+    transform: scale(0.75); /* מקטין את כל התוכן ל-70% מגודלו המקורי */
+    transform-origin: center center; /* ממרכז את ההקטנה */
+    display: inline-block; /* שומר על מבנה המיכל */
+}
+.shrink-container2 {
+    display: flex;
+    justify-content: flex-start; /* ממקם את ה-Search Bar בצד שמאל */
+    align-items: center;
+    transform: scale(0.9);
+    transform-origin: center center;
+}
+
+.box {
+    margin-left: 220px;
+}
+
+
+.input {
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    background: none;
+    border: 4px solid #30883e;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-family: Comic Sans MS;
+    font-size: 26px;
+    color: #30883e;
+    outline: none;
+    transition: width 0.5s, border-radius 0.5s, background 0.5s; /* זמן שינוי */
+}
+
+/* אנימציה בזמן ריחוף */
+.box:hover input {
+    width: 350px;
+    background: #3b3640;
+    border-radius: 10px;
+}
+
+/* עיצוב placeholder */
+.input::placeholder {
+    color: rgba(48, 136, 62, 0.5); /* צבע דהוי */
+    font-style: italic;
+    font-size: 24px;
+    opacity: 0; /* מוסתר בהתחלה */
+    transition: opacity 0.5s; /* שינוי שקיפות */
+}
+
+/* בזמן ריחוף - placeholder יופיע בפייד */
+.box:hover .input::placeholder {
+    opacity: 1;
+}
+
+/* עיצוב האייקון */
+.box i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    color: #30883e;
+    transition: opacity 0.2s; /* מעבר */
+}
+
+.box:hover i {
+    opacity: 0;
+    z-index: -1;
+}
+
+
+
+
+
+/* עיצוב שדה סיסמה */
