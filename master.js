@@ -96,69 +96,118 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Function to handle showing and filtering results
+
+
+
+
+
+
 function filterResults() {
     const searchInput = document.getElementById("search-bar").value.toLowerCase();
     const resultsContainer = document.getElementById("search-results");
 
-    resultsContainer.innerHTML = ""; // Clear previous results
+    resultsContainer.innerHTML = ""; // ניקוי תוצאות קודמות
 
     if (searchInput.trim() === "") {
-        resultsContainer.style.display = "none"; // Hide results if the input is empty
+        resultsContainer.style.display = "none"; // הסתרת התוצאות אם הקלט ריק
         return;
     }
 
-    // Example data (replace with real data)
+    // נתונים מדויקים לפי המבנה שלך
     const data = [
-        { type: "Song", name: "Sweet Child O' Mine" },
-        { type: "Song", name: "Paradise City" },
-        { type: "Playlist", name: "Appetite for Destruction" },
-        { type: "Artist", name: "Guns N' Roses" },
+        { type: "Playlist", name: "Appetite for Destruction", url: "master.html?page=playlist&id=1" },
+        { type: "Artist", name: "Slash", url: "master.html?page=artist&id=1" },
+        { type: "Song", name: "Sweet Child O' Mine", url: "master.html?page=song&id=1" },
+        { type: "Song", name: "Paradise City", url: "master.html?page=song&id=2" }
     ];
 
-    // Filter results based on input
+    // סינון תוצאות לפי קלט
     const filteredResults = data.filter(item =>
         item.name.toLowerCase().includes(searchInput)
     );
 
-    // Display results
+    // הצגת תוצאות
     if (filteredResults.length > 0) {
         filteredResults.forEach(item => {
             const div = document.createElement("div");
-            div.textContent = `${item.type}: ${item.name}`;
-            div.className = "result-item"; // Add a class for styling
-            div.addEventListener("click", () => {
-                alert(`You selected: ${item.name}`); // Example action on click
-            });
+            div.className = "result-item"; // הוספת מחלקה לעיצוב האב
+        
+            div.innerHTML = `
+                <a style="text-decoration: none; color: black" href="${item.url}" class="result-link">
+                    ${item.type}: ${item.name}
+                </a>
+            `;
+        
             resultsContainer.appendChild(div);
         });
-        resultsContainer.style.display = "block"; // Show results
+        
+        resultsContainer.style.display = "block"; // הצגת תיבת התוצאות
     } else {
         resultsContainer.style.display = "block";
-        resultsContainer.innerHTML = "<div class='result-item'>No results found</div>";
+        resultsContainer.innerHTML = "<div class='result-item'>לא נמצאו תוצאות</div>";
     }
 }
 
-document.addEventListener("mouseover", (event) => {
-    const searchBar = document.querySelector(".box"); // תיבת החיפוש הכוללת
-    const resultsContainer = document.getElementById("search-results"); // תיבת התוצאות
 
-    // בדיקה אם העכבר נמצא מחוץ לשניהם
-    if (!searchBar.contains(event.target) && !resultsContainer.contains(event.target)) {
-        resultsContainer.style.display = "none"; // הסתרת תיבת התוצאות
-        searchBar.classList.remove("hover-active"); // ביטול אנימציית ה-hover
+const searchBox = document.querySelector(".box");
+const resultsContainer = document.getElementById("search-results");
+const searchBar = document.getElementById("search-bar");
+const searchIcon = document.querySelector(".box i"); // זכוכית המגדלת
+
+// Keep results visible when hovering on search box or results
+function keepResultsVisible() {
+    resultsContainer.style.display = "block";
+}
+
+// Hide results if leaving both search box and results
+function hideResults(event) {
+    if (!searchBox.contains(event.target) && !resultsContainer.contains(event.target)) {
+        resultsContainer.style.display = "none";
+        searchBox.classList.remove("hover-active"); // Remove hover effect
+        searchBox.classList.add("no-hover"); // הוספת מחלקת "no-hover"
+
     }
-});
+}
 
-// הצגת תיבת התוצאות בעת מעבר על תיבת החיפוש
-document.querySelector(".box").addEventListener("mouseover", () => {
-    const resultsContainer = document.getElementById("search-results");
-    resultsContainer.style.display = "block"; // הצגת התוצאות
-});
+// פונקציה להוספת מחלקה "פעילה" על תיבת החיפוש
+function addHoverClass() {
+    searchBox.classList.add("hover-active");
+    resultsContainer.style.display = "block"; // הצגת תיבת התוצאות
+    searchIcon.style.opacity = "0"; // הסתרת זכוכית המגדלת
+    searchBar.classList.remove("text-hidden"); // החזרת הטקסט לתצוגה
+    searchBox.classList.remove("no-hover"); // הוספת מחלקת "no-hover"
 
-// מניעת סגירת תוצאות כשנמצאים בתוכן התוצאות
-document.getElementById("search-results").addEventListener("mouseover", () => {
-    const resultsContainer = document.getElementById("search-results");
-    resultsContainer.style.display = "block"; // השארת התוצאות מוצגות
-});
+}
+
+// פונקציה להסרת המחלקה "פעילה" ולהוספת המחלקה "no-hover"
+function removeHoverClass(event) {
+    if (
+        !searchBox.contains(event.target) &&
+        !resultsContainer.contains(event.target)
+    ) {
+        searchBox.classList.remove("hover-active"); // הסרת מחלקת "פעילה"
+        resultsContainer.style.display = "none"; // הסתרת תיבת התוצאות
+        searchIcon.style.opacity = "1"; // הצגת זכוכית המגדלת
+        searchBar.classList.add("text-hidden"); // הסתרת הטקסט
+        searchBox.classList.add("no-hover"); // הוספת מחלקת "no-hover"
+    }
+}
+
+// הסרת hover כשעוזבים את גבולות המסמך
+function collapseOnExit(event) {
+    if (event.clientY < 0 || event.clientX < 0 || event.clientX > window.innerWidth || event.clientY > window.innerHeight) {
+        searchBox.classList.remove("hover-active");
+        resultsContainer.style.display = "none";
+        searchIcon.style.opacity = "1"; // הצגת זכוכית המגדלת
+        searchBar.classList.add("text-hidden"); // הסתרת הטקסט
+    }
+}
+
+
+
+// האזנה לאירועי עכבר
+searchBox.addEventListener("mouseenter", addHoverClass);
+resultsContainer.addEventListener("mouseenter", addHoverClass);
+document.addEventListener("mouseover", removeHoverClass);
+document.addEventListener("mouseleave", collapseOnExit);
 

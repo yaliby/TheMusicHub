@@ -11,50 +11,24 @@ body, html {
     color: white;
 }
 
-/* מיקום הלוגו */
+
 .logo-wrapper {
-    position: absolute; /* הלוגו ממוקם באופן מוחלט ביחס ל-header */
-    top: 50%; /* ממורכז אנכית בתוך ה-header */
-    left: 33%; /* ממורכז אופקית */
-    transform: translate(-50%, -50%); /* מבטיח שהמרכוז מדויק */
-    z-index: 1000; /* הלוגו יישאר בשכבה עליונה מעל כל האלמנטים */
-    pointer-events: auto; /* מאפשר לחיצה על הלוגו */
+    display: flex; /* מוודא שהמיכל מתאים את גודלו לתוכן */
+    justify-content: center;
+    align-items: center;
+    max-width: 15%;
 }
-
-
-#search-results {
-    position: absolute; /* Position relative to the parent container */
-    top: 100%; /* Place below the search bar */
-    left: 39%;
-    background-color: #6be369; /* Background for contrast */
-    border: 1px solid #ccc;
-    max-height: 200px; /* Set a limit for scrolling */
-    overflow-y: auto; /* Enable scrolling for long lists */
-    z-index: 1000;
-    display: none; /* Initially hidden */
-    width: 60%;
-    text-align: center;
-    color: #000;
-    font-size: large;
-    font-weight: bold;
-}
-
-.result-item {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.result-item:hover {
-    background-color: #357532; /* Highlight on hover */
-}
-
-
 
 .logo {
-    max-width: 29%; /* גודל הלוגו */
-    height: auto; /* שמירה על פרופורציות */
-    display: block; /* מבטיח שהלוגו מוצג נכון */
+    width:100%; /* אחוזים מתאימים לגודל המסך */
+    height: 100%; /* שמירה על יחס פרופורציות */
+    max-width: 150px; /* גבול עליון */
 }
+
+
+
+
+
 
 
 .bodyL_R{
@@ -655,9 +629,10 @@ body {
 
 
 ul{
-    width: 300px;
+    width: 25%;
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
 }
 
 li{
@@ -787,7 +762,7 @@ li{
     width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
     height: 5%;
     display: flex !important;
-    justify-content: space-between !important; /* ממקם את התוכן לצד ימין */
+    justify-content:space-between !important; /* ממקם את התוכן לצד ימין */
     align-items: center !important;
     background-color: #181818 !important; /* צבע רקע */
     padding: 20px !important;
@@ -900,9 +875,7 @@ li{
     transform-origin: center center;
 }
 
-.box {
-    margin-left: 220px;
-}
+
 
 
 .input {
@@ -920,25 +893,39 @@ li{
     transition: width 0.5s, border-radius 0.5s, background 0.5s; /* זמן שינוי */
 }
 
-/* אנימציה בזמן ריחוף */
-.box:hover input {
+
+
+/* תיבת חיפוש במצב hover או פעילה */
+.box.hover-active .input {
     width: 350px;
     background: #3b3640;
     border-radius: 10px;
 }
 
-/* עיצוב placeholder */
-.input::placeholder {
-    color: rgba(48, 136, 62, 0.5); /* צבע דהוי */
-    font-style: italic;
-    font-size: 24px;
-    opacity: 0; /* מוסתר בהתחלה */
-    transition: opacity 0.5s; /* שינוי שקיפות */
+/* עיצוב מצב ללא hover */
+.box.no-hover .input {
+    color: transparent;
+    
 }
 
+
+/* עיצוב placeholder כברירת מחדל - מוסתר */
+.input::placeholder {
+    color: rgba(48, 136, 62, 0); /* שקוף לחלוטין */
+    transition: color 0.3s ease; /* מעבר חלק */
+    font-size: 70%;
+}
+
+/* הצגת placeholder במצב hover */
+.box:hover .input::placeholder,
+.box.hover-active .input::placeholder {
+    color: rgba(48, 136, 62, 0.8); /* צבע גלוי */
+}
+
+
 /* בזמן ריחוף - placeholder יופיע בפייד */
-.box:hover .input::placeholder {
-    opacity: 1;
+.box.hover-active #search-results {
+    display: block;
 }
 
 /* עיצוב האייקון */
@@ -959,6 +946,37 @@ li{
 
 
 
+
+#search-results {
+    position: absolute; /* Position relative to the parent container */
+    top: 100%; /* Place below the search bar */
+    background-color: #6be369; /* Background for contrast */
+    max-height: 200px; /* Set a limit for scrolling */
+    overflow-y: auto; /* Enable scrolling for long lists */
+    z-index: 1000;
+    display: none; /* Initially hidden */
+    width: 100%;
+    text-align: center;
+    color: #000;
+    font-size: large;
+    font-weight: bold;
+}
+
+.result-item {
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid rgb(19, 90, 19);
+
+}
+
+.result-item:hover {
+    background-color: #357532; /* Highlight on hover */
+}
+.result-link {
+    display: block; /* משנה את האלמנט ל-block כדי שימלא את האב */
+    width: 100%; /* רוחב מלא */
+    height: 100%; /* גובה מלא */
+}
 
 
 /* עיצוב שדה סיסמה */
