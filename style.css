@@ -762,7 +762,7 @@ li{
     width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
     height: 5%;
     display: flex !important;
-    justify-content:space-between !important; /* ממקם את התוכן לצד ימין */
+    justify-content:space-between!important; /* ממקם את התוכן לצד ימין */
     align-items: center !important;
     background-color: #181818 !important; /* צבע רקע */
     padding: 20px !important;
