@@ -22,7 +22,7 @@ body, html {
 .logo {
     width:100%; /* אחוזים מתאימים לגודל המסך */
     height: 100%; /* שמירה על יחס פרופורציות */
-    max-width: 150px; /* גבול עליון */
+    max-width: 70px; /* גבול עליון */
 }
 
 
@@ -759,13 +759,13 @@ li{
 .header {
     position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
     top: 0 !important; /* מצמיד לחלק העליון */
-    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    width: 100vw !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
     height: 5%;
     display: flex !important;
     justify-content:space-between!important; /* ממקם את התוכן לצד ימין */
     align-items: center !important;
     background-color: #181818 !important; /* צבע רקע */
-    padding: 20px !important;
+    padding: 1.5% !important;
     z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
     flex-direction: row-reverse;
 }
@@ -781,20 +781,20 @@ li{
 .popular-artists {
     text-align: center;
     color: white;
-    margin-top: 30px;
+    margin-top: 1%;
 }
 
 .artists-grid {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 2%;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 1%;
 }
 
 .artist img {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 42vh;
     border-radius: 50%;
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -815,7 +815,7 @@ li{
 .suggested-playlists {
     text-align: center;
     color: white;
-    margin-top: 50px;
+    margin-top: 2%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -825,14 +825,14 @@ li{
 .playlists-grid {
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 2%;
     flex-wrap: wrap;
-    margin-top: 20px;
+    margin-top: 2%;
 }
 
 .playlist img {
-    width: 200px;
-    height: 200px;
+    width: 50vh;
+    height: 50vh;
     border-radius: 10px;
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -844,7 +844,7 @@ li{
 }
 
 .playlist p {
-    margin-top: 10px;
+    margin-top: 2%;
     color: #b3b3b3;
     font-size: 1.1rem;
 }
@@ -879,7 +879,7 @@ li{
 
 
 .input {
-    padding: 10px;
+    padding: 2%;
     width: 80px;
     height: 80px;
     background: none;
