@@ -1,19 +1,81 @@
 
 
-// יצירת אובייקט המוזיקה
-const audio = new Audio("music/mixkit-beautiful-dream-493.mp3");
-audio.loop = true; // מוזיקה בלולאה
+// בדיקה אם הדף הנוכחי הוא index.html
+if (window.location.pathname.endsWith("index.html")) {
+    // יצירת אובייקט המוזיקה
+    const audio = new Audio("music/mixkit-beautiful-dream-493.mp3");
+    audio.loop = true; // מוזיקה בלולאה
 
-// הפעלת המוזיקה/כיבויה בלחיצה על הכפתור
-const musicToggle = document.querySelector(".music-toggle");
-let isMusicPlaying = false; // משתנה מעקב אחר מצב המוזיקה
+    // מעקב אחר מצב המוזיקה
+    let isMusicPlaying = false;
+    let isMusicInitialized = false; // האם המוזיקה הופעלה לראשונה
 
+    // איתור כפתור ההשתקה וכפתור "בוא נתחיל"
+    const musicToggle = document.querySelector(".music-toggle");
+    const letsStartButton = document.querySelector(".lets-start-btn");
 
-document.addEventListener("click", () => {
-    audio.play().catch((err) => {
-        console.error("Failed to autoplay audio:", err);
-    });
-});
+    // פונקציה לעדכון מצב הכפתור
+    function updateButtonState() {
+        if (isMusicPlaying) {
+            musicToggle.classList.remove("music-off"); // מצב פועל
+        } else {
+            musicToggle.classList.add("music-off"); // מצב כבוי
+        }
+    }
+
+    // האזנה לאירוע קליק להפעלת המוזיקה (אינטראקציה ראשונית בלבד)
+    document.addEventListener("click", (event) => {
+        // בדיקה אם הקליק אינו על כפתור ההשתקה או "בוא נתחיל"
+        if (
+            !event.target.closest(".music-toggle") && // לא כפתור המוזיקה
+            !event.target.closest(".lets-start-btn") // לא כפתור "בוא נתחיל"
+        ) {
+            if (!isMusicInitialized) {
+                audio.play()
+                    .then(() => {
+                        isMusicPlaying = true;
+                        isMusicInitialized = true; // המוזיקה הופעלה לראשונה
+                        updateButtonState(); // עדכון מצב הכפתור
+                        console.log("Music started playing.");
+                    })
+                    .catch((err) => {
+                        console.error("Failed to play audio:", err);
+                    });
+            }
+        }
+    }, { once: true }); // מאזין רק לקליק הראשון
+
+    // האזנה ללחיצה על כפתור ההשתקה/הפעלה
+    if (musicToggle) {
+        musicToggle.addEventListener("click", (event) => {
+            event.stopPropagation(); // מונע לחיצה נוספת על הדף
+            if (isMusicInitialized) {
+                // רק אם המוזיקה הופעלה קודם
+                if (isMusicPlaying) {
+                    audio.pause();
+                    isMusicPlaying = false;
+                    console.log("Music paused.");
+                    
+                } else {
+                    audio.play()
+                        .then(() => {
+                            isMusicPlaying = true;
+                            console.log("Music resumed.");
+                        })
+                        .catch((err) => {
+                            console.error("Failed to play audio:", err);
+                        });
+                }
+            } else {
+                // אם המוזיקה לא הופעלה קודם, רק מעדכן את הכפתור ללא פעולה
+                isMusicPlaying = false;
+                console.log("Music remains paused.");
+            }
+            updateButtonState(); // עדכון מצב הכפתור לאחר פעולה
+        });
+    }
+}
+
 
 
 // הפונקציה שנטענת כאשר לוחצים על כפתור Let's Start

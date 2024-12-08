@@ -146,7 +146,7 @@ body, html {
     margin-right: 10%;
     cursor: pointer;
     z-index: 2; /* מעל כל התוכן */
-    transition: transform 0.3s ease;
+    transition: transform 1s ease;
 }
 
 /* עיצוב התמונה */
@@ -155,22 +155,52 @@ body, html {
     height: 100%;
     object-fit: cover;
     border-radius: 50%; /* הופך את התמונה לעיגול */
-    transition: transform 0.3s ease;
+    transition: transform 1s ease;
 }
 
 /* אפקט קו אלכסוני אדום */
 .music-toggle.music-off::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background-color: red;
-    transform: rotate(-45deg) translate(-50%, -50%);
+    top: 50%; /* מרכז אנכית */
+    left: 50%; /* מרכז אופקית */
+    width: 100%; /* אורך הקו */
+    height: 2px; /* עובי הקו */
+    background-color: red; /* צבע הקו */
+    transform: translate(-50%, -50%) rotate(-45deg); /* סיבוב הקו */
     transform-origin: center;
-    animation: drawLine 0.5s forwards ease-in-out; /* אנימציה של הקו */
+    opacity: 1; /* גלוי */
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out; /* מעבר חלק */
 }
+
+.music-toggle.music-off::before {
+    content: "";
+    position: absolute;
+    top: 50%; /* מרכז אנכית */
+    left: 50%; /* מרכז אופקית */
+    width: 100%; /* אורך הקו */
+    height: 2px; /* עובי הקו */
+    background-color: red; /* צבע הקו */
+    transform: translate(-50%, -50%) rotate(45deg); /* סיבוב הקו */
+    transform-origin: center;
+    opacity: 1; /* גלוי */
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out; /* מעבר חלק */
+}
+
+/* במצב מופעל (מוזיקה פועלת) */
+.music-toggle:not(.music-off)::after,
+.music-toggle:not(.music-off)::before {
+    opacity: 0; /* מעלים את הקווים */
+    transform: translate(-50%, -50%) scale(0.8); /* מכווץ את הקווים */
+    transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+/* שינוי על hover */
+.music-toggle:hover::after,
+.music-toggle:hover::before {
+    background-color: #ff5757; /* שינוי צבע הקו לאדום בהיר */
+}
+
 
 /* אנימציית הקו האדום */
 @keyframes drawLine {
