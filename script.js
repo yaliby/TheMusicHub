@@ -1,40 +1,37 @@
 
-
 // בדיקה אם הדף הנוכחי הוא index.html
 if (window.location.pathname.endsWith("index.html")) {
-    // יצירת אובייקט המוזיקה
     const audio = new Audio("music/mixkit-beautiful-dream-493.mp3");
-    audio.loop = true; // מוזיקה בלולאה
+    audio.loop = true;
 
-    // מעקב אחר מצב המוזיקה
     let isMusicPlaying = false;
-    let isMusicInitialized = false; // האם המוזיקה הופעלה לראשונה
+    let isMusicInitialized = false;
 
-    // איתור כפתור ההשתקה וכפתור "בוא נתחיל"
     const musicToggle = document.querySelector(".music-toggle");
     const letsStartButton = document.querySelector(".lets-start-btn");
 
-    // פונקציה לעדכון מצב הכפתור
+    // פונקציה לעדכון המצב הוויזואלי של הכפתור
     function updateButtonState() {
-        if (isMusicPlaying) {
-            musicToggle.classList.remove("music-off"); // מצב פועל
-        } else {
-            musicToggle.classList.add("music-off"); // מצב כבוי
+        if (musicToggle) {
+            if (isMusicPlaying) {
+                musicToggle.classList.remove("music-off");
+            } else {
+                musicToggle.classList.add("music-off");
+            }
         }
     }
 
-    // האזנה לאירוע קליק להפעלת המוזיקה (אינטראקציה ראשונית בלבד)
+    // האזנה לאירוע קליק להפעלת המוזיקה לראשונה
     document.addEventListener("click", (event) => {
-        // בדיקה אם הקליק אינו על כפתור ההשתקה או "בוא נתחיל"
         if (
             !event.target.closest(".music-toggle") && // לא כפתור המוזיקה
             !event.target.closest(".lets-start-btn") // לא כפתור "בוא נתחיל"
         ) {
             if (!isMusicInitialized) {
+                isMusicInitialized = true; // המוזיקה הופעלה לראשונה
                 audio.play()
                     .then(() => {
                         isMusicPlaying = true;
-                        isMusicInitialized = true; // המוזיקה הופעלה לראשונה
                         updateButtonState(); // עדכון מצב הכפתור
                         console.log("Music started playing.");
                     })
@@ -43,23 +40,24 @@ if (window.location.pathname.endsWith("index.html")) {
                     });
             }
         }
-    }, { once: true }); // מאזין רק לקליק הראשון
+    }, { once: true }); // מאזין פעם אחת בלבד
 
     // האזנה ללחיצה על כפתור ההשתקה/הפעלה
     if (musicToggle) {
         musicToggle.addEventListener("click", (event) => {
             event.stopPropagation(); // מונע לחיצה נוספת על הדף
+
             if (isMusicInitialized) {
-                // רק אם המוזיקה הופעלה קודם
                 if (isMusicPlaying) {
                     audio.pause();
                     isMusicPlaying = false;
+                    updateButtonState(); // עדכון מצב הכפתור
                     console.log("Music paused.");
-                    
                 } else {
                     audio.play()
                         .then(() => {
                             isMusicPlaying = true;
+                            updateButtonState(); // עדכון מצב הכפתור
                             console.log("Music resumed.");
                         })
                         .catch((err) => {
@@ -67,14 +65,15 @@ if (window.location.pathname.endsWith("index.html")) {
                         });
                 }
             } else {
-                // אם המוזיקה לא הופעלה קודם, רק מעדכן את הכפתור ללא פעולה
-                isMusicPlaying = false;
-                console.log("Music remains paused.");
+                // אם המוזיקה לא הופעלה קודם
+                isMusicInitialized = true;
+                isMusicPlaying = false; // ודא שמתחיל במצב כבוי
+                updateButtonState(); // עדכון מצב הכפתור
             }
-            updateButtonState(); // עדכון מצב הכפתור לאחר פעולה
         });
     }
 }
+
 
 
 
