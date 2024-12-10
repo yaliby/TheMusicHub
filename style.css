@@ -22,7 +22,6 @@ body, html {
 .logo {
     width:100%; /* אחוזים מתאימים לגודל המסך */
     height: 100%; /* שמירה על יחס פרופורציות */
-    max-width: 70px; /* גבול עליון */
 }
 
 
@@ -228,12 +227,19 @@ body.fade-out {
 
 
 
+/* הגדרות בסיס ב-root */
+:root {
+    --btn-width: 12vw; /* רוחב הכפתור יחסית לרוחב המסך */
+    --btn-height: 10vh; /* גובה הכפתור יחסית לגובה המסך */
+    --font-size: 3vh; /* גודל הטקסט בתוך הכפתור */
+}
+
 /* עיצוב הכפתור */
 .btn {
     position: relative;
     display: inline-block;
-    width: 180px;
-    height: 60px;
+    width: var(--btn-width);
+    height: var(--btn-height);
     background: transparent;
     border: none;
     cursor: pointer;
@@ -280,7 +286,7 @@ body.fade-out {
 .btn span {
     position: relative;
     z-index: 1;
-    font-size: 18px;
+    font-size: var(--font-size); /* שימוש בגודל יחסי */
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -626,14 +632,12 @@ body {
 
 
 
-
-
-
 ul{
     width: 25%;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+    height: 170%;
 }
 
 li{
@@ -641,8 +645,8 @@ li{
     display: inline-block;
     font-size: 23px;
     border-radius: 50%;
-    height: 55px;
-    width: 55px;
+    height: 96%;
+    width: 3.5vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -761,12 +765,12 @@ li{
     position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
     top: 0 !important; /* מצמיד לחלק העליון */
     width: 100vw !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
-    height: 5%;
+    height: 5vh;
     display: flex !important;
     justify-content:space-between!important; /* ממקם את התוכן לצד ימין */
     align-items: center !important;
     background-color: #181818 !important; /* צבע רקע */
-    padding: 20px !important;
+    padding: 1.7% !important;
     z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
     flex-direction: row-reverse;
 }
@@ -778,11 +782,17 @@ li{
 
 
 
+
+
+
+
+
+
 /* עיצוב אמנים פופולריים */
 .popular-artists {
     text-align: center;
     color: white;
-    margin-top: 1%;
+    margin-top: 6.5%;
 }
 
 .artists-grid {
@@ -799,6 +809,8 @@ li{
     border-radius: 50%;
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 20vw;
+    max-height: 46vh;
 }
 
 .artist img:hover {
@@ -820,6 +832,7 @@ li{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     gap: 2%;
 }
 
@@ -837,6 +850,8 @@ li{
     border-radius: 10px;
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 26vw;
+    max-height: 58vh;
 }
 
 .playlist img:hover {
@@ -898,7 +913,7 @@ li{
 
 /* תיבת חיפוש במצב hover או פעילה */
 .box.hover-active .input {
-    width: 350px;
+    width: 21.5vw;
     background: #3b3640;
     border-radius: 10px;
 }

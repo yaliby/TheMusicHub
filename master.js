@@ -211,3 +211,26 @@ resultsContainer.addEventListener("mouseenter", addHoverClass);
 document.addEventListener("mouseover", removeHoverClass);
 document.addEventListener("mouseleave", collapseOnExit);
 
+// פונקציה להתאמת סקייל על בסיס גודל המסך
+function adjustScale() {
+    const screenWidth = window.innerWidth; // רוחב המסך הנוכחי
+    const scaleValue = screenWidth / 1920; // יחס למסך רוחב ברירת מחדל (1920px)
+    const elements = document.querySelectorAll('.shrink-containerS'); // בחר את כל האלמנטים
+    const elements2 = document.querySelectorAll('.iconimg'); // בחר את כל האלמנטים
+
+    elements.forEach(element => {
+        element.style.transform = `scale(${scaleValue})`; // הגדר את הערך
+        element.style.transformOrigin = 'center center'; // שמירה על מרכז האלמנט
+    });
+    elements2.forEach(element => {
+        element.style.transform = `hover:rotateY(360deg) scale(${scaleValue})`; // הגדר את הערך
+        element.style.transformOrigin = 'center center'; // שמירה על מרכז האלמנט
+    });
+}
+
+
+// הפעלה ראשונית של הפונקציה
+adjustScale();
+
+// האזנה לשינוי גודל המסך
+window.addEventListener('resize', adjustScale);
