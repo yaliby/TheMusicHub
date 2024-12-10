@@ -334,6 +334,7 @@ body.fade-out {
     overflow: hidden; /* מסתיר תוכן במצב ממוזער */
     max-height: 200px; /* גובה מקסימלי במצב פתוח */
     transition: max-height 1s ease, padding 1.2s ease; /* אנימציה חלקה */
+    height: 12%;
 }
 
 /* במצב ממוזער */

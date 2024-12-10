@@ -193,52 +193,6 @@ width: 20%;    border-radius: 10px;
 
 
 
-/* עיצוב לנגן */
-#music-player {
-    position: fixed; /* הנגן צמוד לחלון המסך */
-    bottom: 0; /* צמוד לחלוטין לתחתית המסך */
-    left: 0; /* מתחיל מהקצה השמאלי */
-    width: 100%; /* תופס את כל רוחב המסך */
-    background-color: #000000; /* רקע כהה */
-    color: #ffffff; /* טקסט לבן */
-    border-radius: 0; /* אין פינות מעוגלות */
-    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.5); /* צל כדי להבליט את הנגן */
-    text-align: center;
-    z-index: 1000; /* מעל כל תוכן אחר */
-}
-
-/* כותרת השיר */
-#song-title {
-    font-size: 1rem; /* גודל טקסט מותאם */
-    font-weight: bold;
-    color: #4CAF50; /* ירוק בהיר */
-    margin-bottom: 10px;
-}
-
-/* הנגן */
-#audio-player {
-    width: 100%; /* תופס את כל רוחב הנגן */
-    border-radius: 0; /* אין פינות מעוגלות */
-    background-color: black; /* צבע רקע כהה לכפתורים */
-    color: white; /* טקסט לבן */
-    padding: 5px;
-    outline: none;
-    border: none;
-}
-
-/* מדיה קוויריז למסכים קטנים */
-@media (max-width: 768px) {
-    #music-player {
-        padding: 10px; /* ריווח פנימי קטן יותר למסכים קטנים */
-    }
-
-    #song-title {
-        font-size: 0.9rem; /* טקסט קטן יותר למסכים קטנים */
-    }
-}
-
-
-
 
 
 
@@ -273,61 +227,7 @@ width: 20%;    border-radius: 10px;
 
 
 
-/* עיצוב לנגן */
-#music-player {
-    position: fixed; /* להצמיד את הנגן לחלון המסך */
-    bottom: 0; /* צמוד לתחתית */
-    left: 50%; /* ממרכז את הנגן אופקית */
-    transform: translateX(-50%); /* ממרכז בצורה מדויקת */
-    background-color: #000000; /* רקע כהה */
-    color: #ffffff; /* טקסט לבן */
-    padding: 15px;
-    border-radius: 20px; /* מעוגל מכל הצדדים */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* צל כדי לתת עומק */
-    width: 98%; /* גודל קטן וממוקד */
-    text-align: center;
-    z-index: 1000; /* מעל תוכן העמוד */
-    height: auto; /* גובה מותאם לפי התוכן */
-}
 
-/* כותרת השיר */
-#song-title {
-    font-size: 1rem; /* גודל טקסט מותאם */
-    font-weight: bold;
-    color: #4CAF50; /* ירוק בהיר */
-    margin-bottom: 10px;
-}
-
-/* הנגן */
-#audio-player {
-    width: 100%; /* מותאם לרוחב הנגן */
-    border-radius: 10px; /* קצוות מעוגלים */
-    background-color: black; /* צבע רקע כהה לכפתורים */
-    color: white; /* טקסט לבן */
-    padding: 5px;
-    outline: none;
-}
-
-/* מרווח לתוכן העמוד */
-body {
-    padding-bottom: 9%; /* מוסיף רווח כדי למנוע מהנגן להסתיר את התוכן */
-}
-
-/* מדיה קוויריז למסכים קטנים */
-@media (max-width: 768px) {
-    #music-player {
-        width: 90%; /* הנגן יתפוס יותר רוחב במסכים קטנים */
-        max-width: 280px; /* גבול לגודל הנגן */
-    }
-
-    #song-title {
-        font-size: 0.9rem; /* טקסט קטן יותר למסכים קטנים */
-    }
-
-    body {
-        padding-bottom: 100px; /* רווח גדול יותר למסכים קטנים */
-    }
-}
 
 
 
