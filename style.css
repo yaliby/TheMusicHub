@@ -835,7 +835,7 @@ li{
 }
 /* שינוי לעמודי האמנים */
 .artist-page .header {
-    transform: translateX(2.5%); /* הניו-בר זז שמאלה */
+    transform: translateX(3.5%); /* הניו-בר זז שמאלה */
 }
 
 
