@@ -223,7 +223,7 @@ function adjustScale() {
         element.style.transformOrigin = 'center center'; // שמירה על מרכז האלמנט
     });
     elements2.forEach(element => {
-        element.style.transform = `hover:rotateY(360deg) scale(${scaleValue})`; // הגדר את הערך
+        element.style.transform = `scale(${scaleValue})`; // הגדר את הערך
         element.style.transformOrigin = 'center center'; // שמירה על מרכז האלמנט
     });
 }

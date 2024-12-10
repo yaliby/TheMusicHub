@@ -384,6 +384,7 @@ body.fade-out {
     color: white; /* טקסט לבן */
     padding: 5px;
     outline: none;
+    height: 65%;
 }
 
 /* מרווח לתוכן העמוד */
@@ -680,24 +681,82 @@ li{
     transition: 0.6s;
 }
 
-li:hover .icon1{
-    transform: rotateY(360deg);
+li:hover .icon1 {
+    animation: twoSpins 0.6s ease-in-out forwards;
     text-shadow: 0px 0px 1px #ff0095;
+    display: inline-block;
+    perspective: 1000px;
 }
 
+@keyframes twoSpins {
+    0% {
+        opacity: 1;
+        filter: brightness(1);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    12.5% {
+        opacity: 0.8;
+        filter: brightness(0.8);
+        clip-path: polygon(10% 0%, 90% 0%, 90% 100%, 10% 100%);
+    }
+    25% {
+        opacity: 0.5;
+        filter: brightness(0.6);
+        clip-path: polygon(20% 0%, 80% 0%, 80% 100%, 20% 100%);
+    }
+    37.5% {
+        opacity: 0.8;
+        filter: brightness(0.8);
+        clip-path: polygon(10% 0%, 90% 0%, 90% 100%, 10% 100%);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    62.5% {
+        opacity: 0.8;
+        filter: brightness(0.8);
+        clip-path: polygon(10% 0%, 90% 0%, 90% 100%, 10% 100%);
+    }
+    75% {
+        opacity: 0.5;
+        filter: brightness(0.6);
+        clip-path: polygon(20% 0%, 80% 0%, 80% 100%, 20% 100%);
+    }
+    87.5% {
+        opacity: 0.8;
+        filter: brightness(0.8);
+        clip-path: polygon(10% 0%, 90% 0%, 90% 100%, 10% 100%);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+}
+
+
+
 li:hover .icon2{
-    transform: rotateY(360deg);
+    animation: twoSpins 0.6s ease-in-out forwards;
     text-shadow: 0px 0px 1px #1c9ff1;
+    display: inline-block;
+    perspective: 1000px;
 }
 
 li:hover .icon3{
-    transform: rotateY(360deg);
+    animation: twoSpins 0.6s ease-in-out forwards;
     text-shadow: 0px 0px 1px #ff0000;
+    display: inline-block;
+    perspective: 1000px;
 }
 
 li:hover .icon4{
-    transform: rotateY(360deg);
+    animation: twoSpins 0.6s ease-in-out forwards;
     text-shadow: 0px 0px 1px #0679e6;
+    display: inline-block;
+    perspective: 1000px;
 }
 
 li{
