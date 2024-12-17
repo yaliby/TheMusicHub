@@ -1,98 +1,67 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const dynamicContent = document.getElementById("dynamic-content");
-    const page = new URLSearchParams(window.location.search).get("page") || "home";
+// הגדרות סקייל גלובליות
+const SCALE_SETTINGS = {
+    baseWidth: 1960, // בסיס לגודל מסך ממוצע
+    minScale: 0.7, // סקייל מינימלי
+    maxScale: 1.5, // סקייל מקסימלי
+    iconScaleFactor: 1.6, // מקדם הגדלה לאייקונים
+    ilScaleFactor: 1.5 // מקדם הגדלה ל-il
+};
 
-    // Load dynamic page
-    if (page === "artist") {
-        fetch("artist.html")
-            .then((response) => {
-                if (!response.ok) throw new Error("Artist page not found");
-                return response.text();
-            })
-            .then((content) => {
-                dynamicContent.innerHTML = content;
+function adjustScale() {
+    const screenWidth = window.innerWidth; // רוחב המסך הנוכחי
 
-                // Dynamically load artist.js
-                const script = document.createElement("script");
-                script.src = "artist.js";
-                document.body.appendChild(script);
-            })
-            .catch((err) => {
-                dynamicContent.innerHTML = "<h1>Artist page not found!</h1>";
-                console.error(err);
-            });
-    } else if (page === "playlist") {
-        fetch("playlist.html")
-            .then((response) => {
-                if (!response.ok) throw new Error("Playlist page not found");
-                return response.text();
-            })
-            .then((content) => {
-                dynamicContent.innerHTML = content;
+    // חישוב סקייל אלמנט כללי
+    const scaleValue = Math.max(screenWidth / SCALE_SETTINGS.baseWidth);
 
-                // Dynamically load playlist.js
-                const script = document.createElement("script");
-                script.src = "playlist.js";
-                document.body.appendChild(script);
-            })
-            .catch((err) => {
-                dynamicContent.innerHTML = "<h1>Playlist page not found!</h1>";
-                console.error(err);
-            });
-    } else {
-        fetch(`${page}.html`)
-            .then((response) => {
-                if (!response.ok) throw new Error(`Page ${page} not found`);
-                return response.text();
-            })
-            .then((content) => {
-                dynamicContent.innerHTML = content;
-            })
-            .catch((err) => {
-                dynamicContent.innerHTML = "<h1>Page not found</h1>";
-                console.error(err);
-            });
-    }
-});
+    // חישוב סקייל לאייקונים עם מקדם הגדלה
+    const scaleValueIcons = Math.max(
+        SCALE_SETTINGS.minScale,
+        Math.min(SCALE_SETTINGS.maxScale, scaleValue * SCALE_SETTINGS.iconScaleFactor)
+    );
 
-document.addEventListener("DOMContentLoaded", () => {
-    const musicPlayer = document.getElementById("music-player");
-    const toggleButton = document.getElementById("toggle-player");
+    const scaleValueIl = Math.max(
+        SCALE_SETTINGS.minScale,
+        Math.min(SCALE_SETTINGS.maxScale, scaleValue * SCALE_SETTINGS.ilScaleFactor)
+    );
 
-    // שחזור מצב הנגן מ-localStorage
-    const savedState = localStorage.getItem("playerState");
-    if (savedState === "collapsed") {
-        musicPlayer.classList.add("collapsed");
-        musicPlayer.style.maxHeight = "25px";
-        musicPlayer.style.padding = "5px";
-    }
-
-    // הוספת אירוע לחיצה לשינוי מצב הנגן
-    toggleButton.addEventListener("click", () => {
-        if (musicPlayer.classList.contains("collapsed")) {
-            // מצב פתוח
-            musicPlayer.classList.remove("collapsed");
-            musicPlayer.style.maxHeight = "200px"; // הגדר גובה פתוח
-            musicPlayer.style.padding = "15px"; // הגדר ריווח רגיל
-            localStorage.setItem("playerState", "expanded");
-        } else {
-            // מצב ממוזער
-            musicPlayer.classList.add("collapsed");
-            musicPlayer.style.maxHeight = "25px"; // הגדר גובה ממוזער
-            musicPlayer.style.padding = "5px"; // הגדר ריווח קטן
-            localStorage.setItem("playerState", "collapsed");
-        }
+    // התאמת אלמנטים כלליים
+    const elements = document.querySelectorAll('.shrink-containerS');
+    elements.forEach(element => {
+        element.style.transform = `scale(${scaleValue})`;
+        element.style.transformOrigin = 'center center';
     });
-});
+
+    // התאמת אייקונים
+    const elements2 = document.querySelectorAll('.iconimg');
+    elements2.forEach(element => {
+        element.style.transform = `scale(${scaleValueIcons})`;
+        element.style.transformOrigin = 'center center';
+    });
+
+    // התאמת אלמנטים il
+    const elements3 = document.querySelectorAll('.il');
+    elements3.forEach(element => {
+        element.style.transform = `scale(${scaleValueIl})`;
+        element.style.transformOrigin = 'center center';
+    });
+}
+
+// הפעלה ראשונית של הפונקציה
+adjustScale();
+
+// האזנה לשינוי גודל המסך
+window.addEventListener('resize', adjustScale);
 
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    const page = new URLSearchParams(window.location.search).get("page");
-    if (page === "artist") {
-        document.body.classList.add("artist-page");
-    }
-});
+
+
+
+
+
+
+
+
 
 
 
@@ -152,85 +121,156 @@ function filterResults() {
 const searchBox = document.querySelector(".box");
 const resultsContainer = document.getElementById("search-results");
 const searchBar = document.getElementById("search-bar");
-const searchIcon = document.querySelector(".box i"); // זכוכית המגדלת
 
-// Keep results visible when hovering on search box or results
-function keepResultsVisible() {
-    resultsContainer.style.display = "block";
-}
-
-// Hide results if leaving both search box and results
-function hideResults(event) {
-    if (!searchBox.contains(event.target) && !resultsContainer.contains(event.target)) {
-        resultsContainer.style.display = "none";
-        searchBox.classList.remove("hover-active"); // Remove hover effect
-        searchBox.classList.add("no-hover"); // הוספת מחלקת "no-hover"
-
-    }
-}
-
-// פונקציה להוספת מחלקה "פעילה" על תיבת החיפוש
-function addHoverClass() {
+// הרחבת תיבת החיפוש על Hover
+searchBox.addEventListener("mouseenter", () => {
     searchBox.classList.add("hover-active");
-    resultsContainer.style.display = "block"; // הצגת תיבת התוצאות
-    searchIcon.style.opacity = "0"; // הסתרת זכוכית המגדלת
-    searchBar.classList.remove("text-hidden"); // החזרת הטקסט לתצוגה
-    searchBox.classList.remove("no-hover"); // הוספת מחלקת "no-hover"
+    searchBox.classList.remove("no-hover");
 
-}
+    resultsContainer.style.display = "block";
+    searchBar.style.width = "400px"; // הרחבת ה-Search Bar
+});
 
-// פונקציה להסרת המחלקה "פעילה" ולהוספת המחלקה "no-hover"
-function removeHoverClass(event) {
-    if (
-        !searchBox.contains(event.target) &&
-        !resultsContainer.contains(event.target)
-    ) {
-        searchBox.classList.remove("hover-active"); // הסרת מחלקת "פעילה"
-        resultsContainer.style.display = "none"; // הסתרת תיבת התוצאות
-        searchIcon.style.opacity = "1"; // הצגת זכוכית המגדלת
-        searchBar.classList.add("text-hidden"); // הסתרת הטקסט
-        searchBox.classList.add("no-hover"); // הוספת מחלקת "no-hover"
-    }
-}
+// מניעת צמצום כאשר מרחפים על התוצאות
+resultsContainer.addEventListener("mouseenter", () => {
+    resultsContainer.style.display = "block";
+    searchBox.classList.add("hover-active");
+    searchBox.classList.remove("no-hover");
 
-// הסרת hover כשעוזבים את גבולות המסמך
-function collapseOnExit(event) {
-    if (event.clientY < 0 || event.clientX < 0 || event.clientX > window.innerWidth || event.clientY > window.innerHeight) {
+});
+
+// צמצום התיבה כאשר יוצאים משניהם
+document.addEventListener("mousemove", (event) => {
+    if (!searchBox.contains(event.target) && !resultsContainer.contains(event.target)) {
         searchBox.classList.remove("hover-active");
         resultsContainer.style.display = "none";
-        searchIcon.style.opacity = "1"; // הצגת זכוכית המגדלת
-        searchBar.classList.add("text-hidden"); // הסתרת הטקסט
+        searchBar.style.width = "80px";
+        searchBox.classList.add("no-hover");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function addHoverClass() {
+    searchBox.classList.add("hover-active");
+    resultsContainer.style.display = "block";
+    searchIcon.style.opacity = "0";
+    searchBar.classList.remove("text-hidden");
+    searchBox.classList.remove("no-hover");
+}
+
+function removeHoverClass(event) {
+    if (!searchBox.contains(event.target) && !resultsContainer.contains(event.target)) {
+        searchBox.classList.remove("hover-active");
+        resultsContainer.style.display = "none";
+        searchIcon.style.opacity = "1";
+        searchBar.classList.add("text-hidden");
+        searchBox.classList.add("no-hover");
     }
 }
 
-
-
-// האזנה לאירועי עכבר
 searchBox.addEventListener("mouseenter", addHoverClass);
 resultsContainer.addEventListener("mouseenter", addHoverClass);
 document.addEventListener("mouseover", removeHoverClass);
-document.addEventListener("mouseleave", collapseOnExit);
 
-// פונקציה להתאמת סקייל על בסיס גודל המסך
-function adjustScale() {
-    const screenWidth = window.innerWidth; // רוחב המסך הנוכחי
-    const scaleValue = screenWidth / 1920; // יחס למסך רוחב ברירת מחדל (1920px)
-    const elements = document.querySelectorAll('.shrink-containerS'); // בחר את כל האלמנטים
-    const elements2 = document.querySelectorAll('.iconimg'); // בחר את כל האלמנטים
+// התאמת רוחב דינמית לתיבת החיפוש
+document.querySelector('.box').addEventListener('mouseover', () => {
+    const screenWidth = window.innerWidth;
+    const newWidth = Math.min(screenWidth * 0.2, 400);
+    searchBar.style.width = `${newWidth}px`;
+});
 
-    elements.forEach(element => {
-        element.style.transform = `scale(${scaleValue})`; // הגדר את הערך
-        element.style.transformOrigin = 'center center'; // שמירה על מרכז האלמנט
+document.querySelector('.box').addEventListener('mouseout', () => {
+    searchBar.style.width = '80px';
+});
+
+// טיפול בדף דינמי לפי סוג עמוד
+document.addEventListener("DOMContentLoaded", () => {
+    const dynamicContent = document.getElementById("dynamic-content");
+    const page = new URLSearchParams(window.location.search).get("page") || "home";
+
+    if (page === "artist") {
+        fetch("artist.html")
+            .then((response) => response.ok ? response.text() : Promise.reject("Artist page not found"))
+            .then((content) => {
+                dynamicContent.innerHTML = content;
+                const script = document.createElement("script");
+                script.src = "artist.js";
+                document.body.appendChild(script);
+            })
+            .catch((err) => {
+                dynamicContent.innerHTML = "<h1>Artist page not found!</h1>";
+                console.error(err);
+            });
+    } else if (page === "playlist") {
+        fetch("playlist.html")
+            .then((response) => response.ok ? response.text() : Promise.reject("Playlist page not found"))
+            .then((content) => {
+                dynamicContent.innerHTML = content;
+                const script = document.createElement("script");
+                script.src = "playlist.js";
+                document.body.appendChild(script);
+            })
+            .catch((err) => {
+                dynamicContent.innerHTML = "<h1>Playlist page not found!</h1>";
+                console.error(err);
+            });
+    } else {
+        fetch(`${page}.html`)
+            .then((response) => response.ok ? response.text() : Promise.reject(`Page ${page} not found`))
+            .then((content) => {
+                dynamicContent.innerHTML = content;
+            })
+            .catch((err) => {
+                dynamicContent.innerHTML = "<h1>Page not found</h1>";
+                console.error(err);
+            });
+    }
+});
+
+// טיפול במצב נגן
+document.addEventListener("DOMContentLoaded", () => {
+    const musicPlayer = document.getElementById("music-player");
+    const toggleButton = document.getElementById("toggle-player");
+
+    const savedState = localStorage.getItem("playerState");
+    if (savedState === "collapsed") {
+        musicPlayer.classList.add("collapsed");
+        musicPlayer.style.maxHeight = "25px";
+        musicPlayer.style.padding = "5px";
+    }
+
+    toggleButton.addEventListener("click", () => {
+        if (musicPlayer.classList.contains("collapsed")) {
+            musicPlayer.classList.remove("collapsed");
+            musicPlayer.style.maxHeight = "200px";
+            musicPlayer.style.padding = "15px";
+            localStorage.setItem("playerState", "expanded");
+        } else {
+            musicPlayer.classList.add("collapsed");
+            musicPlayer.style.maxHeight = "25px";
+            musicPlayer.style.padding = "5px";
+            localStorage.setItem("playerState", "collapsed");
+        }
     });
-    elements2.forEach(element => {
-        element.style.transform = `scale(${scaleValue})`; // הגדר את הערך
-        element.style.transformOrigin = 'center center'; // שמירה על מרכז האלמנט
-    });
-}
-
-
-// הפעלה ראשונית של הפונקציה
-adjustScale();
-
-// האזנה לשינוי גודל המסך
-window.addEventListener('resize', adjustScale);
+});

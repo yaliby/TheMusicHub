@@ -44,7 +44,9 @@ width: 20%;    border-radius: 10px;
 
 
 
-
+ul{
+    margin-right: 0;
+}
 
 
 .artist-container ul {
@@ -148,19 +150,22 @@ width: 20%;    border-radius: 10px;
 
 
 
+
+
 .header {
     position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
     top: 0 !important; /* מצמיד לחלק העליון */
-    right: 0 !important; /* מצמיד לצד ימין */
-    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    width: 100vw !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
+    height: 7%;
     display: flex !important;
-    justify-content: flex-end !important; /* ממקם את התוכן לצד ימין */
+    justify-content: space-between !important; /* ממקם את התוכן לצד ימין */
     align-items: center !important;
     background-color: #181818 !important; /* צבע רקע */
     padding: 20px !important;
     z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
+    flex-direction: row-reverse;
+    
 }
-
 .header-left .nav-button {
     background: none;
     border: none;
@@ -176,53 +181,42 @@ width: 20%;    border-radius: 10px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.header {
-    position: fixed !important; /* מקבע את ה-header למיקום קבוע במסך, לא ניתן לדריסה */
-    top: 0 !important; /* מצמיד לחלק העליון */
-    width: 100% !important; /* מאפשר ל-header לכסות את כל רוחב המסך */
-    height: 5%;
-    display: flex !important;
-    justify-content: space-between !important; /* ממקם את התוכן לצד ימין */
-    align-items: center !important;
-    background-color: #181818 !important; /* צבע רקע */
-    padding: 20px !important;
-    z-index: 1000 !important; /* מבטיח שה-header יהיה מעל כל האלמנטים */
-    flex-direction: row-reverse;
+.instagram{
+margin-top: 20%;
 }
+.twitter{
+margin-top: 20%;
+}
+.facebook{
+margin-top: 20%;
+}
+.youtube{
+    margin-top: 20%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
